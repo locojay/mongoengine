@@ -308,7 +308,8 @@ class ListField(BaseField):
                     # Dereference DBRefs
                     if isinstance(value, (pymongo.dbref.DBRef)):
                         value = _get_db().dereference(value)
-                        deref_list.append(referenced_type._from_son(value))
+                        if value: 
+                            deref_list.append(referenced_type._from_son(value))
                     else:
                         deref_list.append(value)
                 instance._data[self.name] = deref_list
